@@ -1,0 +1,130 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rock, Paper and Scissors</title>
+        <link rel="stylesheet" href="style.css">
+    <head>
+    
+        
+    
+    <body>
+<div class="h1"><p>Rock, Paper and Scissors</p></div>
+        <div class="rock">
+            <button id="rock">
+                <img src="images/rock.png" alt="rock">
+            </button>
+        </div>
+
+        <div class="paper">
+            <button id="paper">
+                <img src="images/paper.png" alt="paper">
+            </button>
+        </div>
+
+        <div class="scissors">
+            <button id="scissors">
+                <img src="images/scissors.png" alt="scissors">
+            </button>
+        </div>
+    
+    <p id="player-score">Player: 0</p>
+    <p id="computer-score">Computer: 0</p>
+    <p>Computer picked:  </p>
+    </body>
+
+<script>
+// doms
+const rock = document.getElementById('rock');
+const paper = document.getElementById('paper');
+const scissors = document.getElementById('scissors');
+
+// variables
+let playerScore = 0;
+let computerScore = 0;
+
+// functions
+function computerPlay() {
+    let random = Math.floor(Math.random() * 3);
+    if (random === 0) {
+        return 'rock';
+    } else if (random === 1) {
+        return 'paper';
+    } else {
+        return 'scissors';
+    }
+}
+
+// event listeners
+rock.addEventListener('click', function() {
+    let computerSelection = computerPlay();
+    if (computerSelection === 'rock') {
+        console.log('tie');
+        displayScores();
+        displayComputerSelection(computerSelection);
+    } else if (computerSelection === 'paper') {
+        console.log('computer wins');
+        displayComputerSelection(computerSelection);
+        computerScore++;
+        displayScores()
+        displayComputerSelection(computerSelection);
+    } else {
+        console.log('player wins');
+        playerScore++;
+        displayScores()
+        displayComputerSelection(computerSelection);
+    }
+});
+
+paper.addEventListener('click', function() {
+    let computerSelection = computerPlay();
+    if (computerSelection === 'paper') {
+        console.log('tie');
+        displayComputerSelection(computerSelection);
+    } else if (computerSelection === 'scissors') {
+        console.log('computer wins');
+        computerScore++;
+        displayScores()
+        displayComputerSelection(computerSelection);
+    } else {
+        console.log('player wins');
+        displayComputerSelection(computerSelection);
+        playerScore++;
+        displayScores()
+        
+    }
+});
+
+scissors.addEventListener('click', function() {
+    let computerSelection = computerPlay();
+    if (computerSelection === 'scissors') {
+        console.log('tie');
+    } else if (computerSelection === 'rock') {
+        console.log('computer wins');
+        computerScore++;
+        displayScores()
+        displayComputerSelection(computerSelection);
+    } else {
+        console.log('player wins');
+        playerScore++;
+        displayScores();
+        displayComputerSelection(computerSelection);
+    }
+});
+
+// display scores
+function displayScores() {
+    document.getElementById('player-score').innerHTML = "Player: " + playerScore;
+    document.getElementById('computer-score').innerHTML = "Computer: " + computerScore;
+}
+
+// display computer selection
+function displayComputerSelection(computerSelection) {
+    let computerSelectionImage = document.createElement('img');
+    computerSelectionImage.src = `images/${computerSelection}.png`;
+    computerSelectionImage.alt = computerSelection;
+    document.body.appendChild(computerSelectionImage);
+}
+
+</script>
+</html>
